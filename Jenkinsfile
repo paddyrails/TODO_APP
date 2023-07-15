@@ -15,7 +15,9 @@ pipeline {
     stage("Build"){
       steps {
         dir("TODO_APP"){
-          echo "Running build.."          
+          echo "Running build.."    
+          sh "docker build -t paddypillai/todo_app:${BUILD_NUMBER} ."
+          sh "docker push paddypillai/todo_app:${BUILD_NUMBER}-release"
         }
       }
     }
