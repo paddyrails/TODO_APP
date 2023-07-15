@@ -5,7 +5,7 @@ pipeline {
     stage("Clean Up"){
       steps {
         deleteDir()
-        echo "${BRANCH_NAME} ${CHANGE_ID}"
+        echo "${BRANCH_NAME}"
       }
     }
      stage("Clone Repo"){
