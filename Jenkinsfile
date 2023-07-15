@@ -10,7 +10,8 @@ pipeline {
     }
      stage("Clone Repo"){
       steps {
-        sh "git clone https://github.com/paddyrails/TODO_APP.git"
+        echo "Cloning Repo"
+        // sh "git clone https://github.com/paddyrails/TODO_APP.git"
       }
     }
     stage("Build"){
