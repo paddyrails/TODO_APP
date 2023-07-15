@@ -22,5 +22,17 @@ pipeline {
         }
       }
     }
+    stage("Code scan"){
+      steps {  
+         script {     
+          dir("TODO_APP"){
+              if((env.BRANCH_NAME).startsWith('PR-')){
+              echo "Run CQM Reporting.."    
+              echo "Query Sonar Gate Quality Gate.."            
+            }
+          }     
+         }   
+      }
+    }
   }
 }
