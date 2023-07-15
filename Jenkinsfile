@@ -9,10 +9,18 @@ pipeline {
     }
      stage("Clone Repo"){
       steps {
-        sh "git clone https://github.com/paddyrails/TODO_APP.git"
+        // sh "git clone https://github.com/paddyrails/TODO_APP.git"
       }
     }
-    stage("Build"){
+    stage("Compile & Test"){
+      steps {
+        dir("TODO_APP"){
+          echo "Running build.."    
+          echo "Running tests.."    
+        }
+      }
+    }
+    stage("Update Sonar Report"){
       steps {
         dir("TODO_APP"){
           echo "Running build.."    
@@ -24,8 +32,15 @@ pipeline {
       steps {
         dir("TODO_APP"){
           echo "Running build.."    
-          sh "docker build -t paddypillai/todo_app:${BUILD_NUMBER} ."
-          sh "docker push paddypillai/todo_app:${BUILD_NUMBER}-release"
+          // sh "docker build -t paddypillai/todo_app:${BUILD_NUMBER} ."
+          // sh "docker push paddypillai/todo_app:${BUILD_NUMBER}-release"
+        }
+      }
+    }
+    stage("Deploy code to live Prod and DR"){
+      steps {
+        dir("TODO_APP"){
+          echo "Deploying to Live Prod and DR.."              
         }
       }
     }
