@@ -17,6 +17,7 @@ pipeline {
     stage("Tag"){
       dir("TODO_APP"){
         steps {
+          echo "tag"
           // sh "git clone https://github.com/paddyrails/TODO_APP.git"
         }
       }
@@ -54,6 +55,7 @@ pipeline {
     stage("Push Tag"){
       steps {
         dir("TODO_APP"){
+          echo "Push Tag.." 
           // sh "git clone https://github.com/paddyrails/TODO_APP.git"
         }
       }
