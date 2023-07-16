@@ -9,6 +9,7 @@ pipeline {
     }
      stage("Clone Repo"){
       steps {
+        echo "Cloning repo"
         // sh "git clone https://github.com/paddyrails/TODO_APP.git"
       }
     }
