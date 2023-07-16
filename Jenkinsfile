@@ -9,7 +9,16 @@ pipeline {
     }
      stage("Clone Repo"){
       steps {
-        // sh "git clone https://github.com/paddyrails/TODO_APP.git"
+        dir("TODO_APP"){
+          // sh "git clone https://github.com/paddyrails/TODO_APP.git"
+        }
+      }
+    }
+    stage("Tag"){
+      dir("TODO_APP"){
+        steps {
+          // sh "git clone https://github.com/paddyrails/TODO_APP.git"
+        }
       }
     }
     stage("Compile & Test"){
@@ -20,24 +29,36 @@ pipeline {
         }
       }
     }
-    stage("Update Sonar Report"){
+    stage("CQM Reporting"){
+      steps {
+        echo "Run CQM Reporting.."    
+        echo "Query Sonar Gate Quality Gate.."  
+      }
+    }
+    stage("Query Sonar Quality Gate"){
       steps {
         dir("TODO_APP"){
-          echo "Running build.."    
-          echo "Running tests.."    
+          echo "Query Sonar Quality Gate.."               
         }
       }
     }
-    stage("Create docker image and publish"){
+    stage("Binary to Staging (Create docker image and publish)"){
       steps {
         dir("TODO_APP"){
-          echo "Running build.."    
+          echo "Running docker create.."    
           // sh "docker build -t paddypillai/todo_app:${BUILD_NUMBER} ."
           // sh "docker push paddypillai/todo_app:${BUILD_NUMBER}-release"
         }
       }
     }
-    stage("Deploy code to live Prod and DR"){
+    stage("Push Tag"){
+      steps {
+        dir("TODO_APP"){
+          // sh "git clone https://github.com/paddyrails/TODO_APP.git"
+        }
+      }
+    }
+    stage("Deploy"){
       steps {
         dir("TODO_APP"){
           echo "Deploying to Live Prod and DR.."              
